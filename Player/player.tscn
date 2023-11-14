@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://bqewwu5su41aw"]
+
+[ext_resource type="Script" path="res://Player/player.gd" id="1_a0bgn"]
+[ext_resource type="ArrayMesh" uid="uid://2wwy05lbip5n" path="res://Assets/Hatchet.obj" id="2_6m8n8"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7ygne"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_vdn7w"]
+size = Vector2(10, 10)
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_a0bgn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_7ygne")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+
+[node name="Axe" type="MeshInstance3D" parent="."]
+transform = Transform3D(-0.00469846, 0, 0.0017101, 0, 0.005, 0, -0.0017101, 0, -0.00469846, -0.3271, -0.624275, -0.425443)
+mesh = ExtResource("2_6m8n8")
+
+[node name="Platform" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15229, -0.699255, -0.870954)
+mesh = SubResource("PlaneMesh_vdn7w")

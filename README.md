@@ -38,6 +38,9 @@ https://www.1001fonts.com/karma-font.html
 Shaders:
 https://godotshaders.com/shader/ps1-psx-postprocessing/
 
+Enemy Ai:
+https://www.youtube.com/watch?v=iV710Vm5qm0&t=515s
+
 ## Future Development
 I would like to add a more complex alien AI so that there was more suspense and tension. I need to add a cooldown timer on the radio so that the player cannot spam it. I also wanted to add some sort of animation for stunning the alien. I think the story could be expanded upon more, and the player could have interacted with the dialogue somehow.
 

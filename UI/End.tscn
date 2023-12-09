@@ -1,0 +1,212 @@
+[gd_scene load_steps=15 format=3 uid="uid://dw75us8wsln24"]
+
+[ext_resource type="MeshLibrary" uid="uid://cpllijtwt0p8u" path="res://tiles.tres" id="1_hk0uq"]
+[ext_resource type="Shader" path="res://ps1.gdshader" id="1_ho604"]
+[ext_resource type="Material" uid="uid://dphd0ndri38dv" path="res://glass.tres" id="2_eh1g4"]
+[ext_resource type="Script" path="res://UI/End.gd" id="2_o83u8"]
+[ext_resource type="AudioStream" uid="uid://bstfpy6o350d8" path="res://Assets/522572__matrixxx__retro-bomb-explosion.wav" id="5_gcfpr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ul6ca"]
+shader = ExtResource("1_ho604")
+shader_parameter/enabled = true
+shader_parameter/dithering = true
+shader_parameter/colors = 12
+shader_parameter/dither_size = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_lq1rl"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dybu7"]
+
+[sub_resource type="Environment" id="Environment_7vh6e"]
+background_mode = 1
+sdfgi_enabled = true
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c6hfv"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 2.64
+
+[sub_resource type="SphereMesh" id="SphereMesh_a2o6n"]
+material = SubResource("StandardMaterial3D_c6hfv")
+radius = 0.1
+height = 0.2
+
+[sub_resource type="Animation" id="Animation_va257"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GridMap:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CSGMesh3D2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.923309, -0.433403, 17.8917)]
+}
+
+[sub_resource type="Animation" id="Animation_ife43"]
+resource_name = "explosion"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(2.8, 3.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(0.913725, 0.823529, 0.662745, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GridMap:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.5, -0.5, -0.5), Vector3(0, 0, 0), Vector3(-1, -1, -1), Vector3(0, 0, 0), Vector3(-0.5, -0.5, -0.5), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CSGMesh3D2:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.00114655, 0.555089, 18.863), Vector3(-0.489241, 0.054934, 18.3188), Vector3(-0.00114655, 0.555089, 18.863), Vector3(-0.923309, -0.433403, 17.8917), Vector3(-0.00114655, 0.555089, 18.863), Vector3(-0.489241, 0.054934, 18.3188), Vector3(-0.00114655, 0.555089, 18.863)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dyv1h"]
+_data = {
+"RESET": SubResource("Animation_va257"),
+"explosion": SubResource("Animation_ife43")
+}
+
+[node name="End" type="SubViewportContainer"]
+material = SubResource("ShaderMaterial_ul6ca")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+script = ExtResource("2_o83u8")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="GridMap" type="GridMap" parent="SubViewport"]
+mesh_library = ExtResource("1_hk0uq")
+data = {
+"cells": PackedInt32Array(-65533, 1, 0, -4, 1, 0, -65533, 65534, 1441793, -4, 4, 1441793, -2, 65525, 1441795, -65533, 65527, 655363, -9, 65532, 2, -65533, 65530, 0, -6, 3, 1048579, -11, 1, 3, -65526, 8, 1048577, -65526, 15, 1048578, -65521, 10, 1048576, -65521, 3, 1048576, -65519, 2, 1048577, -65521, 65526, 1048576, -65526, 65531, 5, -65517, 10, 1, -65512, 15, 0, -65512, 65531, 0, -65514, 65533, 655362, -65510, 65533, 1, -65507, 65533, 1048581, -65507, 65535, 1048581, -65507, 1, 1048581, -65507, 3, 1048576, -65512, 12, 1441793, -65503, 10, 1, -65498, 15, 1048577, -65500, 17, 655362, -65519, 22, 1048578, -65514, 17, 1048576, -65517, 65526, 2, -65512, 65521, 655363, -65514, 24, 655361, -65507, 17, 1048576, -65507, 24, 655361, -65524, 31, 2, -65519, 36, 1048578, -65519, 33, 655365, -65517, 33, 655363, -65500, 24, 655361, -65503, 24, 1441795, -65493, 24, 655362, -65496, 10, 1, -65498, 12, 1441793, -65491, 22, 1048577, -65486, 17, 655362, -65491, 5, 1441794, -65482, 15, 5, -65480, 15, 5, -65478, 15, 5, -65476, 15, 5, -65474, 15, 655364, -65500, 65526, 655362, -65503, 65526, 1441797, -65503, 65524, 1441797, -65503, 65522, 1441797, -65503, 65520, 1441792, -65505, 65518, 3, -65503, 65513, 1441795, -65498, 65515, 655363, -65524, 65526, 1441795, -65531, 65532, 1441795, -4, 7, 3, -65484, 15, 1048577)
+}
+metadata/_editor_floor_ = Vector3(0, -1, 0)
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport"]
+transform = Transform3D(0.766044, 0.111619, -0.633022, 0, 0.984808, 0.173648, 0.642788, -0.133022, 0.754407, -6.37456, 3.79579, 26.0714)
+
+[node name="CSGMesh3D2" type="CSGMesh3D" parent="SubViewport"]
+transform = Transform3D(5.9, 0, 0, 0, 3.1, 0, 0, 0, 0.2, -0.923309, -0.433403, 17.8917)
+mesh = SubResource("BoxMesh_lq1rl")
+material = ExtResource("2_eh1g4")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="SubViewport/CSGMesh3D2"]
+transform = Transform3D(0.166667, 0, 0, 0, 0.166667, 0, 0, 0, 5, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/CSGMesh3D2/StaticBody3D2"]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 0.2, 0, 0, 0)
+shape = SubResource("BoxShape3D_dybu7")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewport"]
+environment = SubResource("Environment_7vh6e")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.1736, 0.384834, 2.95445)
+amount = 40
+lifetime = 3.0
+preprocess = 70.79
+speed_scale = 0.02
+mesh = SubResource("SphereMesh_a2o6n")
+emission_shape = 1
+emission_sphere_radius = 20.0
+spread = 180.0
+initial_velocity_min = 17.0
+initial_velocity_max = 30.0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46.8097, 8.26397, -26.7924)
+light_color = Color(1, 1, 0.643137, 1)
+light_energy = 16.0
+light_indirect_energy = 4.449
+light_volumetric_fog_energy = 0.0
+light_size = 1.095
+omni_range = 89.86
+omni_attenuation = 0.0853775
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.5424, -47.8365, -33.5471)
+light_color = Color(1, 0.360784, 0.352941, 1)
+light_energy = 16.0
+light_indirect_energy = 4.449
+light_volumetric_fog_energy = 0.0
+light_size = 1.095
+omni_range = 89.86
+omni_attenuation = 0.0853775
+
+[node name="ColorRect" type="ColorRect" parent="SubViewport"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewport"]
+autoplay = "explosion"
+libraries = {
+"": SubResource("AnimationLibrary_dyv1h")
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="SubViewport"]
+stream = ExtResource("5_gcfpr")
+volume_db = -36.603
+autoplay = true
+
+[connection signal="animation_finished" from="SubViewport/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://5h7n1qyg0apg"]
+
+[ext_resource type="Script" path="res://UI/HUD.gd" id="1_1ujsm"]
+[ext_resource type="Theme" uid="uid://cg6nvmppi77nt" path="res://UI/Time.tres" id="2_8xqmo"]
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_1ujsm")
+
+[node name="Time_HUD" type="Timer" parent="."]
+process_mode = 3
+autostart = true
+
+[node name="Background" type="ColorRect" parent="."]
+process_mode = 3
+visible = false
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_right = 1114.0
+offset_bottom = 30.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 0.501961)
+
+[node name="Time" type="Label" parent="."]
+process_mode = 3
+layout_mode = 0
+offset_left = 58.0
+offset_top = 42.0
+offset_right = 94.0
+offset_bottom = 106.0
+theme = ExtResource("2_8xqmo")
+text = "..."
+horizontal_alignment = 2
+
+[connection signal="timeout" from="Time_HUD" to="." method="_on_time_hud_timeout"]

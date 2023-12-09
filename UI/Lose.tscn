@@ -1,0 +1,91 @@
+[gd_scene load_steps=6 format=3 uid="uid://bg1pfgiugt200"]
+
+[ext_resource type="Script" path="res://UI/Lose.gd" id="1_ou11q"]
+[ext_resource type="Theme" uid="uid://cg6nvmppi77nt" path="res://UI/Time.tres" id="2_m4fgf"]
+[ext_resource type="Theme" uid="uid://ddkkwc832dn58" path="res://UI/button.tres" id="3_s15p0"]
+[ext_resource type="AudioStream" uid="uid://cueft52hkfbrl" path="res://Assets/657935__matrixxx__retro-error.wav" id="4_f4qv4"]
+[ext_resource type="AudioStream" uid="uid://d2edp2ys55jmr" path="res://Assets/553199__nachtmahrtv__drone-sound.wav" id="5_bkmrn"]
+
+[node name="Lose" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ou11q")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.913725, 0.823529, 0.662745, 1)
+
+[node name="text" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -495.0
+offset_top = 167.0
+offset_right = 459.0
+offset_bottom = 539.0
+grow_horizontal = 2
+theme = ExtResource("2_m4fgf")
+theme_override_colors/font_color = Color(0, 0, 0.486275, 1)
+theme_override_font_sizes/font_size = 70
+text = "<< ship destroyed >>
+
+"
+
+[node name="text2" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -502.0
+offset_top = 194.0
+offset_right = 452.0
+offset_bottom = 566.0
+grow_horizontal = 2
+theme = ExtResource("2_m4fgf")
+theme_override_colors/font_color = Color(0, 0, 0.486275, 1)
+theme_override_font_sizes/font_size = 70
+text = "
+
+... 1 personnel casualty"
+
+[node name="Replay" type="Button" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -95.0
+offset_top = 139.0
+offset_right = 98.0
+offset_bottom = 201.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_s15p0")
+theme_override_font_sizes/font_size = 40
+text = "Replay"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_f4qv4")
+volume_db = -31.374
+autoplay = true
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_bkmrn")
+volume_db = -27.307
+autoplay = true
+
+[connection signal="pressed" from="Replay" to="." method="_on_replay_pressed"]

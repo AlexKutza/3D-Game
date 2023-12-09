@@ -1,0 +1,76 @@
+[gd_scene load_steps=4 format=3 uid="uid://i2iwy8s8kckv"]
+
+[ext_resource type="Script" path="res://UI/Pause.gd" id="1_i5psk"]
+[ext_resource type="Theme" uid="uid://ddkkwc832dn58" path="res://UI/button.tres" id="2_j5q7x"]
+[ext_resource type="Theme" uid="uid://cg6nvmppi77nt" path="res://UI/Time.tres" id="3_bauf7"]
+
+[node name="Pause" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_i5psk")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.490196, 0.117647, 0.411765)
+
+[node name="title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -143.0
+offset_top = 144.0
+offset_right = 176.0
+offset_bottom = 322.0
+grow_horizontal = 2
+theme = ExtResource("3_bauf7")
+theme_override_font_sizes/font_size = 90
+text = "PAUSED"
+
+[node name="Main" type="Button" parent="."]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.5
+offset_top = -15.0
+offset_right = 96.5
+offset_bottom = 47.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_j5q7x")
+theme_override_font_sizes/font_size = 40
+text = "Main"
+
+[node name="Quit" type="Button" parent="."]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.5
+offset_top = 81.0
+offset_right = 96.5
+offset_bottom = 143.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_j5q7x")
+theme_override_font_sizes/font_size = 40
+text = "Quit"
+
+[connection signal="pressed" from="Main" to="." method="_on_main_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

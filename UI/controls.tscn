@@ -1,0 +1,116 @@
+[gd_scene load_steps=8 format=3 uid="uid://cbmevjvlgwxnr"]
+
+[ext_resource type="Script" path="res://UI/controls.gd" id="1_ccieg"]
+[ext_resource type="Theme" uid="uid://cg6nvmppi77nt" path="res://UI/Time.tres" id="1_dnv1t"]
+[ext_resource type="Theme" uid="uid://ddkkwc832dn58" path="res://UI/button.tres" id="2_dktjd"]
+[ext_resource type="AudioStream" uid="uid://d2edp2ys55jmr" path="res://Assets/553199__nachtmahrtv__drone-sound.wav" id="4_e43ej"]
+
+[sub_resource type="Environment" id="Environment_k15c0"]
+background_mode = 1
+background_color = Color(0, 0.0823529, 0.152941, 1)
+background_energy_multiplier = 0.0
+sdfgi_enabled = true
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_52i85"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 2.64
+
+[sub_resource type="SphereMesh" id="SphereMesh_nn7vk"]
+material = SubResource("StandardMaterial3D_52i85")
+radius = 0.1
+height = 0.2
+
+[node name="Controls" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ccieg")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_k15c0")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.3101, 0.215622, 0.305297)
+amount = 40
+lifetime = 2.0
+preprocess = 102.58
+speed_scale = 0.02
+mesh = SubResource("SphereMesh_nn7vk")
+emission_shape = 1
+emission_sphere_radius = 2.0
+spread = 180.0
+initial_velocity_min = 17.0
+initial_velocity_max = 30.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = 457.0
+offset_top = 143.0
+offset_right = 1532.0
+offset_bottom = 794.0
+color = Color(0.913725, 0.823529, 0.662745, 1)
+
+[node name="header" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -145.0
+offset_top = 240.0
+offset_right = 448.0
+offset_bottom = 418.0
+grow_horizontal = 2
+theme = ExtResource("1_dnv1t")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 80
+text = "Controls"
+
+[node name="text" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -231.5
+offset_top = 396.0
+offset_right = 370.5
+offset_bottom = 588.0
+grow_horizontal = 2
+theme = ExtResource("1_dnv1t")
+theme_override_colors/font_color = Color(0, 0, 0.486275, 1)
+theme_override_font_sizes/font_size = 50
+text = "Move --------- WASD
+Radio -------- Left Mouse
+Jump --------- Space
+"
+
+[node name="Back" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -77.0
+offset_top = 168.0
+offset_right = 116.0
+offset_bottom = 230.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_dktjd")
+theme_override_font_sizes/font_size = 40
+text = "Back"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_e43ej")
+volume_db = -17.43
+autoplay = true
+
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]

@@ -1,0 +1,136 @@
+[gd_scene load_steps=9 format=3 uid="uid://bfn1huuwaxuf4"]
+
+[ext_resource type="Script" path="res://UI/main.gd" id="1_1ku55"]
+[ext_resource type="Theme" uid="uid://ddkkwc832dn58" path="res://UI/button.tres" id="1_8k2vx"]
+[ext_resource type="Theme" uid="uid://cg6nvmppi77nt" path="res://UI/Time.tres" id="1_nwxl2"]
+[ext_resource type="PackedScene" uid="uid://r108qryca1mp" path="res://Assets/radio.glb" id="2_xswg2"]
+[ext_resource type="AudioStream" uid="uid://d2edp2ys55jmr" path="res://Assets/553199__nachtmahrtv__drone-sound.wav" id="5_v5fe3"]
+
+[sub_resource type="Environment" id="Environment_4au0o"]
+background_mode = 1
+background_color = Color(0, 0.0823529, 0.152941, 1)
+background_energy_multiplier = 0.0
+sdfgi_enabled = true
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5s5t2"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 2.64
+
+[sub_resource type="SphereMesh" id="SphereMesh_8df4q"]
+material = SubResource("StandardMaterial3D_5s5t2")
+radius = 0.1
+height = 0.2
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1ku55")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_4au0o")
+
+[node name="CPUParticles3D" type="CPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.3101, 0.215622, 0.305297)
+amount = 40
+lifetime = 2.0
+preprocess = 102.58
+speed_scale = 0.02
+mesh = SubResource("SphereMesh_8df4q")
+emission_shape = 1
+emission_sphere_radius = 2.0
+spread = 180.0
+initial_velocity_min = 17.0
+initial_velocity_max = 30.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.28932, 0, -0.107012)
+light_energy = 2.15
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.48633, 0, -2.15293)
+
+[node name="Play" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 57.0
+offset_top = -25.0
+offset_right = 251.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_8k2vx")
+theme_override_font_sizes/font_size = 40
+text = "Play"
+
+[node name="Quit" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 59.0
+offset_top = 64.0
+offset_right = 252.0
+offset_bottom = 126.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_8k2vx")
+theme_override_font_sizes/font_size = 40
+text = "Quit"
+
+[node name="Controls" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 59.0
+offset_top = 152.0
+offset_right = 254.0
+offset_bottom = 218.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_8k2vx")
+theme_override_font_sizes/font_size = 40
+text = "Controls"
+
+[node name="title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -144.5
+offset_top = 152.0
+offset_right = 448.5
+offset_bottom = 330.0
+grow_horizontal = 2
+theme = ExtResource("1_nwxl2")
+theme_override_font_sizes/font_size = 90
+text = "Radio Silence"
+
+[node name="radio" parent="." instance=ExtResource("2_xswg2")]
+transform = Transform3D(0.128558, 0, 0.153209, 0, 0.2, 0, -0.153209, 0, 0.128558, 2.05922, -0.24959, -1.27435)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_v5fe3")
+volume_db = -17.43
+autoplay = true
+
+[connection signal="pressed" from="Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Controls" to="." method="_on_controls_pressed"]
